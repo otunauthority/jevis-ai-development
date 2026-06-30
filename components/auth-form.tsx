@@ -24,16 +24,11 @@ export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
     setLoading(true)
 
     try {
+      const data = isSignUp ? { email, password, name } : { email, password }
+      
       const result = isSignUp
-        ? await authClient.signUp({
-            email,
-            password,
-            name,
-          })
-        : await authClient.signIn({
-            email,
-            password,
-          })
+        ? await authClient.signUp.email(data)
+        : await authClient.signIn.email(data)
 
       if (result?.error) {
         setError(result.error.message || (isSignUp ? 'Sign up failed' : 'Sign in failed'))
