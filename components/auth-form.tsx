@@ -7,7 +7,6 @@ import { authClient } from '@/lib/auth-client'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Card } from '@/components/ui/card'
 
 export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
   const router = useRouter()
@@ -40,8 +39,8 @@ export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
   }
 
   return (
-    <main className="min-h-svh bg-background flex items-center justify-center px-4">
-      <Card className="w-full max-w-sm p-6">
+    <main className="min-h-screen bg-background flex items-center justify-center px-4">
+      <div className="w-full max-w-sm p-6 rounded-lg border border-border bg-card">
         <div className="mb-6">
           <h1 className="text-2xl font-semibold tracking-tight text-foreground">
             {isSignUp ? 'Create an account' : 'Welcome back'}
@@ -114,7 +113,7 @@ export function AuthForm({ mode }: { mode: 'sign-in' | 'sign-up' }) {
             {isSignUp ? 'Sign in' : 'Sign up'}
           </Link>
         </p>
-      </Card>
+      </div>
     </main>
   )
 }
