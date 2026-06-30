@@ -28,6 +28,7 @@ export const auth = betterAuth({
   ...(process.env.NODE_ENV === 'development'
     ? {
         advanced: {
+          disableCSRFCheck: true,
           // In dev (v0 preview iframe), force cross-site cookies so the
           // session cookie is stored by the browser.
           defaultCookieAttributes: {
