@@ -47,7 +47,7 @@ export default async function DashboardPage() {
               <div className="p-4 rounded-lg border border-border bg-card">
                 <h3 className="font-semibold mb-4">Conversations</h3>
                 <div className="space-y-2">
-                  <Link href="/dashboard/chat/new">
+                  <Link href="/dashboard/chat">
                     <Button className="w-full bg-primary hover:bg-primary/90 justify-start" size="sm">
                       + New Chat
                     </Button>
@@ -72,7 +72,7 @@ export default async function DashboardPage() {
                 </div>
                 <h2 className="text-2xl font-bold">Welcome to JEVIS</h2>
                 <p className="text-muted-foreground">Start a new conversation to begin</p>
-                <Link href="/dashboard/chat/new">
+                <Link href="/dashboard/chat">
                   <Button className="bg-primary hover:bg-primary/90 w-full mt-4">
                     Start Chatting
                   </Button>
