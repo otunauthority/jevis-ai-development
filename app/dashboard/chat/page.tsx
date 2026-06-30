@@ -1,15 +1,25 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { useChat } from 'ai/react'
-import { useEffect, useRef } from 'react'
+import { useChat } from '@ai-sdk/react'
+import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 
 export default function ChatPage() {
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
+  const { messages, sendMessage, isLoading: chatIsLoading } = useChat({
     api: '/api/chat',
   })
+  const [inputValue, setInputValue] = useState('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
+  const isLoading = chatIsLoading
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (inputValue.trim()) {
+      sendMessage(inputValue)
+      setInputValue('')
+    }
+  }
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -90,15 +100,15 @@ export default function ChatPage() {
           <div className="flex gap-3">
             <input
               type="text"
-              value={input}
-              onChange={handleInputChange}
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
               placeholder="Ask JEVIS anything..."
               disabled={isLoading}
               className="flex-1 px-4 py-2 rounded-lg border border-border bg-background text-foreground placeholder:text-muted-foreground disabled:opacity-50 focus:outline-none focus:ring-2 focus:ring-primary"
             />
             <Button
               type="submit"
-              disabled={isLoading || !input.trim()}
+              disabled={isLoading || !inputValue.trim()}
               className="bg-primary hover:bg-primary/90 disabled:opacity-50"
             >
               Send
