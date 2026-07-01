@@ -6,19 +6,15 @@ import { useEffect, useRef, useState } from 'react'
 import Link from 'next/link'
 
 export default function ChatPage() {
-  const { messages, sendMessage, isLoading: chatIsLoading } = useChat({
-    api: '/api/chat',
-  })
+  const { messages, sendMessage, isLoading } = useChat({ api: '/api/chat' })
   const [inputValue, setInputValue] = useState('')
   const messagesEndRef = useRef<HTMLDivElement>(null)
-  const isLoading = chatIsLoading
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    if (inputValue.trim()) {
-      sendMessage(inputValue)
-      setInputValue('')
-    }
+    if (!inputValue.trim()) return
+    sendMessage(inputValue)
+    setInputValue('')
   }
 
   const scrollToBottom = () => {
